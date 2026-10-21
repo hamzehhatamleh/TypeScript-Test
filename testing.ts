@@ -24,7 +24,7 @@ function mapTicketStatus(status: string): AgentStatus {
         return "active";
     }
 
-    if(status==="pending"){
+    if(status==="pending" || status==="on_hold"){
         return "waiting"
 
     }
@@ -50,21 +50,9 @@ assert.equal(mapTicketStatus(""),"unknown")
 })
 
 
+test("on_hold should become waiting", () => {
+    assert.equal(mapTicketStatus("on_hold"), "waiting");
+});
 
-const cases = [
-    { input: "open", expected: "active" },
-    { input: "new", expected: "active" },
-    { input: "pending", expected: "waiting" },
-    { input: "closed", expected: "completed" },
-    { input: "", expected: "unknown" }
-];
+console.log("daaaaaaaaaaaaa")
 
-
-for (const c of cases){
-
-    test(`${c.input} should become ${c.expected}`,()=>{
-        assert.equal(c.input,c.expected)
-    })
-
-
-}

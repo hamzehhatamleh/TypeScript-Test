@@ -54,5 +54,16 @@ test("on_hold should become waiting", () => {
     assert.equal(mapTicketStatus("on_hold"), "waiting");
 });
 
-console.log("daaaaaaaaaaaaa")
+const cases = [
+    { input: "open", expected: "active" },
+    { input: "new", expected: "active" },
+    { input: "pending", expected: "waiting" },
+    { input: "closed", expected: "completed" },
+    { input: "", expected: "unknown" }
+];
 
+for (const c of cases) {
+    test(`${c.input} should become ${c.expected}`, () => {
+        assert.equal(mapTicketStatus(c.input), c.expected);
+    });
+}
